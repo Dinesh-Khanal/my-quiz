@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   item: {
     borderBlockColor: "#ccc",
     borderBottomWidth: 1,
-    marginBottom: 8,
-    padding: 12,
+    paddingHorizontal: 20,
+    paddingVertical: 8,
   },
 });

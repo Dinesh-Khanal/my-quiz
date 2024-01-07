@@ -8,13 +8,18 @@ import { useFonts } from "expo-font";
 import { LinearGradient } from "expo-linear-gradient";
 import { HomeScreenProps } from "../types";
 import { FontAwesome, FontAwesome5, Entypo } from "@expo/vector-icons";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const bgImage = require("../assets/images/mt-everest.jpg");
 
 export default function Home({ navigation }: HomeScreenProps) {
   //If you add fontWeight in style then custom font does not work!!
   const [fontsLoaded] = useFonts({
-    Aclonica_400Regular,
+    Aclonica: Aclonica_400Regular,
+    Roboto: require("../assets/fonts/Roboto-Regular.ttf"),
   });
   if (!fontsLoaded) {
     return <Text>Loading...</Text>;
@@ -47,7 +52,7 @@ export default function Home({ navigation }: HomeScreenProps) {
             style={[styles.btn, { backgroundColor: COLORS.greenish }]}
             onPress={() => navigation.navigate("Quiz", { category: "history" })}
           >
-            <FontAwesome name="header" size={24} color="white" />
+            <FontAwesome name="header" size={hp(2.6)} color="white" />
             <Text style={styles.btnText}>History</Text>
           </Pressable>
           <Pressable
@@ -56,7 +61,7 @@ export default function Home({ navigation }: HomeScreenProps) {
               navigation.navigate("Quiz", { category: "geography" })
             }
           >
-            <Entypo name="globe" size={24} color="white" />
+            <Entypo name="globe" size={hp(2.6)} color="white" />
             <Text style={styles.btnText}>Geography</Text>
           </Pressable>
           <Pressable
@@ -65,14 +70,18 @@ export default function Home({ navigation }: HomeScreenProps) {
               navigation.navigate("Quiz", { category: "cultural" })
             }
           >
-            <FontAwesome5 name="place-of-worship" size={24} color="white" />
+            <FontAwesome5
+              name="place-of-worship"
+              size={hp(2.6)}
+              color="white"
+            />
             <Text style={styles.btnText}>Cultural</Text>
           </Pressable>
           <Pressable
             style={[styles.btn, { backgroundColor: COLORS.yelloish }]}
             onPress={() => navigation.navigate("Quiz", { category: "others" })}
           >
-            <FontAwesome5 name="flag-checkered" size={24} color="white" />
+            <FontAwesome5 name="flag-checkered" size={hp(2.6)} color="white" />
             <Text style={styles.btnText}>Others</Text>
           </Pressable>
         </View>
@@ -94,10 +103,10 @@ export default function Home({ navigation }: HomeScreenProps) {
 const styles = StyleSheet.create({
   heading: {
     textAlign: "center",
-    fontSize: 48,
+    fontSize: hp(5),
     marginVertical: 16,
     color: "white",
-    fontFamily: "Aclonica_400Regular",
+    fontFamily: "Aclonica",
   },
   main: {
     borderColor: "white",
@@ -108,7 +117,8 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   btn: {
-    margin: 14,
+    marginHorizontal: 14,
+    marginVertical: 12,
     borderRadius: 8,
     flexDirection: "row",
     alignItems: "center",
@@ -117,8 +127,8 @@ const styles = StyleSheet.create({
   },
   btnText: {
     color: "white",
-    alignSelf: "center",
-    fontSize: 32,
+    fontSize: hp(3.5),
+    fontFamily: "Roboto",
     paddingVertical: 8,
     marginLeft: 12,
   },
