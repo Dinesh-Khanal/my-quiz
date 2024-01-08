@@ -4,9 +4,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList, StyleSheet, Text, View, Pressable } from "react-native";
 import { questionData } from "../assets/data/questions";
 import { useState, useRef, useEffect } from "react";
-import QuestionItem, { deviceWidth } from "../components/questionItem";
+import QuestionItem from "../components/questionItem";
 import ResultModal from "../components/modal";
 import { QuizScreenProps, Question } from "../types";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 export default function Quiz({ route, navigation }: QuizScreenProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -108,7 +109,7 @@ export default function Quiz({ route, navigation }: QuizScreenProps) {
           />
         )}
         onScroll={(e) => {
-          const x = Math.round(e.nativeEvent.contentOffset.x / deviceWidth);
+          const x = Math.round(e.nativeEvent.contentOffset.x / wp(100));
           setCurrentIndex(x);
         }}
         horizontal

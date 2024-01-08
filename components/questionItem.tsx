@@ -1,15 +1,7 @@
-import {
-  View,
-  Text,
-  Dimensions,
-  FlatList,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
-import React, { useState } from "react";
+import { View, Text, FlatList } from "react-native";
+import React from "react";
 import Option from "./option";
-
-export const deviceWidth = Dimensions.get("window").width;
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 type Question = {
   question: string;
@@ -37,8 +29,8 @@ export default function QuestionItem({
   return (
     <View
       style={{
-        width: deviceWidth,
-        paddingHorizontal: 14,
+        width: wp(99.5),
+        paddingHorizontal: 12,
         paddingVertical: 8,
       }}
     >
