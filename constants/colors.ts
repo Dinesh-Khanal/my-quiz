@@ -4,4 +4,5 @@ export const COLORS = {
   brownish: "#5BD7DC",
   lightBulish: "#68E5FA",
   yelloish: "#28AACB",
+  purpalgray: "#DF478C",
 };

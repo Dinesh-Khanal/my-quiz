@@ -8,6 +8,7 @@ import QuestionItem from "../components/questionItem";
 import ResultModal from "../components/modal";
 import { QuizScreenProps, Question } from "../types";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
+import { getRandom } from "../utils/getRandom";
 
 export default function Quiz({ route, navigation }: QuizScreenProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -20,8 +21,13 @@ export default function Quiz({ route, navigation }: QuizScreenProps) {
   const { category } = route.params;
 
   useEffect(() => {
-    const qdata = questionData.filter((q) => q.category == category);
-    setData(qdata);
+    let qdata;
+    if (category !== "all") {
+      qdata = questionData.filter((q) => q.category == category);
+    } else {
+      qdata = questionData;
+    }
+    setData(getRandom(qdata, 20));
   }, []);
   const markItem = (idx: number, x: number) => {
     const markedData = data.map((item) =>
@@ -29,14 +35,17 @@ export default function Quiz({ route, navigation }: QuizScreenProps) {
     );
     setData(markedData);
   };
-  const reset = () => {
-    const resetData = data.map((item) => ({ ...item, marked: -1 }));
-    setData(resetData);
-    setShowAnswer(false);
+  const moveToStart = () => {
     listRef.current?.scrollToIndex({
       animated: true,
       index: 0,
     });
+  };
+  const reset = () => {
+    const resetData = data.map((item) => ({ ...item, marked: -1 }));
+    setData(resetData);
+    setShowAnswer(false);
+    moveToStart();
   };
   const getResult = () => {
     const score = data.reduce(
@@ -149,14 +158,20 @@ export default function Quiz({ route, navigation }: QuizScreenProps) {
                 index: currentIndex + 1,
               });
             } else {
-              onSubmit();
+              if (!showAnswer) {
+                onSubmit();
+              }
             }
           }}
           style={[
             styles.btn,
             {
               backgroundColor:
-                currentIndex < data.length - 1 ? "purple" : "#995522",
+                currentIndex < data.length - 1
+                  ? "purple"
+                  : showAnswer && currentIndex == data.length - 1
+                  ? "#ccc"
+                  : "#995522",
             },
           ]}
         >
@@ -169,6 +184,7 @@ export default function Quiz({ route, navigation }: QuizScreenProps) {
         modalVisible={visible}
         setModalVisible={setVisible}
         setShowAnswer={setShowAnswer}
+        moveToStart={moveToStart}
         totalScore={totalScore}
         attempted={attemped}
         totalQuestions={data.length}

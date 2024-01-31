@@ -26,7 +26,11 @@ export default function Option({
           flexDirection: "row",
           alignItems: "center",
           backgroundColor:
-            showAnswer && correct === idx + 1 ? "green" : COLORS.yelloish,
+            showAnswer && correct === idx + 1
+              ? "green"
+              : showAnswer && marked === idx && correct !== idx + 1
+              ? "red"
+              : COLORS.yelloish,
           borderRadius: 12,
         }}
       >

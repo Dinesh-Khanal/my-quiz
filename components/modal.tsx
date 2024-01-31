@@ -4,6 +4,7 @@ type ModalProps = {
   modalVisible: boolean;
   setModalVisible: (isVisible: boolean) => void;
   setShowAnswer: (isShowAnswer: boolean) => void;
+  moveToStart: () => void;
   totalScore: number;
   attempted: number;
   totalQuestions: number;
@@ -12,6 +13,7 @@ export default function ResultModal({
   modalVisible,
   setModalVisible,
   setShowAnswer,
+  moveToStart,
   totalQuestions,
   totalScore,
   attempted,
@@ -41,6 +43,7 @@ export default function ResultModal({
             onPress={() => {
               setShowAnswer(true);
               setModalVisible(false);
+              moveToStart();
             }}
           >
             <Text style={styles.textStyle}>Show Answers</Text>

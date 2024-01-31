@@ -45,9 +45,16 @@ export default function Home({ navigation }: HomeScreenProps) {
             marginTop: 16,
           }}
         >
-          Select the category
+          Select the category, every times 20 different questions come randomly
         </Text>
         <View style={styles.main}>
+          <Pressable
+            style={[styles.btn, { backgroundColor: COLORS.purpalgray }]}
+            onPress={() => navigation.navigate("Quiz", { category: "all" })}
+          >
+            <FontAwesome name="arrows" size={hp(2.6)} color="white" />
+            <Text style={styles.btnText}>Mixed All</Text>
+          </Pressable>
           <Pressable
             style={[styles.btn, { backgroundColor: COLORS.greenish }]}
             onPress={() => navigation.navigate("Quiz", { category: "history" })}
@@ -104,7 +111,7 @@ const styles = StyleSheet.create({
   heading: {
     textAlign: "center",
     fontSize: hp(5),
-    marginVertical: 16,
+    marginVertical: 12,
     color: "white",
     fontFamily: "Aclonica",
   },
@@ -118,7 +125,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     marginHorizontal: 14,
-    marginVertical: 12,
+    marginVertical: 8,
     borderRadius: 8,
     flexDirection: "row",
     alignItems: "center",
@@ -127,9 +134,9 @@ const styles = StyleSheet.create({
   },
   btnText: {
     color: "white",
-    fontSize: hp(3.5),
+    fontSize: hp(3),
     fontFamily: "Roboto",
-    paddingVertical: 8,
+    paddingVertical: 5,
     marginLeft: 12,
   },
 });
